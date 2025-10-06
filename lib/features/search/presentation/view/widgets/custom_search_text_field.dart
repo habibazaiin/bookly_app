@@ -11,19 +11,18 @@ class CustomSearchTextField extends StatelessWidget {
         hintText: 'Search',
         suffixIcon: Opacity(
           opacity: 0.8,
-          child: Icon(FontAwesomeIcons.magnifyingGlass, size: 20)),
+          child: Icon(FontAwesomeIcons.magnifyingGlass, size: 20),
+        ),
         enabledBorder: buildWhiteOutlineBorder(),
-        focusedBorder: buildWhiteOutlineBorder()
+        focusedBorder: buildWhiteOutlineBorder(),
       ),
     );
   }
 
   OutlineInputBorder buildWhiteOutlineBorder() {
     return OutlineInputBorder(
-        borderSide: BorderSide(
-          color: Colors.white
-        ),
-        borderRadius: BorderRadius.circular(12)
-      );
+      borderSide: BorderSide(color: Colors.white),
+      borderRadius: BorderRadius.circular(12),
+    );
   }
 }
