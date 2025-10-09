@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FeaturedListViewItem extends StatelessWidget {
-  const FeaturedListViewItem({super.key});
+  const FeaturedListViewItem({super.key, required this.imageURL});
+  final String imageURL;
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +13,7 @@ class FeaturedListViewItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           color: Colors.red,
           image: DecorationImage(
-            image: NetworkImage(
-              'https://th.bing.com/th/id/OSK.56824888c78d672aece69be7be5d66a2?w=160&h=238&c=7&rs=1&qlt=80&o=6&dpr=1.3&pid=SANGAM',
-            ),
+            image: NetworkImage(imageURL),
             fit: BoxFit.fill,
           ),
         ),

@@ -52,7 +52,9 @@ class ServerFailure extends Failure {
       case 401:
         return ServerFailure('Unauthorized. Please check your credentials.');
       case 403:
-        return ServerFailure('Forbidden. You don’t have access to this resource.');
+        return ServerFailure(
+          'Forbidden. You don’t have access to this resource.',
+        );
       case 404:
         return ServerFailure('Resource not found. Please try again later.');
       case 500:
