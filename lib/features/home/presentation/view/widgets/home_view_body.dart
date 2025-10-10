@@ -1,9 +1,9 @@
 import 'package:bookly_app/constants.dart';
 import 'package:bookly_app/core/utils/assets.dart';
 import 'package:bookly_app/core/utils/styles.dart';
-import 'package:bookly_app/features/home/presentation/view/widgets/book_list_view.dart';
-import 'package:bookly_app/features/home/presentation/view/widgets/best_seller_list_view_item.dart';
-import 'package:bookly_app/features/home/presentation/view/widgets/featured_list_view_item.dart';
+import 'package:bookly_app/features/home/presentation/view/widgets/newest_books_list_view.dart';
+import 'package:bookly_app/features/home/presentation/view/widgets/newest_books_list_view_item.dart';
+import 'package:bookly_app/features/home/presentation/view/widgets/custom_book_image.dart';
 import 'package:bookly_app/features/home/presentation/view/widgets/features_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -28,7 +28,7 @@ class HomeViewBody extends StatelessWidget {
               SizedBox(height: 50),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                child: Text('Best Seller', style: Styles.textStyle18),
+                child: Text('Newest Books', style: Styles.textStyle18),
               ),
               SizedBox(height: 20),
             ],
@@ -37,7 +37,7 @@ class HomeViewBody extends StatelessWidget {
         SliverFillRemaining(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
-            child: BookListView(),
+            child: NewestBooksListView(),
           ),
         ),
       ],
