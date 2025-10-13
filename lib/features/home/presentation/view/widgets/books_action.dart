@@ -1,3 +1,4 @@
+import 'package:bookly_app/core/functions/get_text.dart';
 import 'package:bookly_app/core/widgets/custom_button.dart';
 import 'package:bookly_app/features/home/data/models/book_model/book_model.dart';
 import 'package:flutter/material.dart';
@@ -48,11 +49,9 @@ class BooksAction extends StatelessWidget {
     );
   }
 
-  String getText(BookModel bookModel) {
-    if (bookModel.volumeInfo.previewLink == null) {
-      return 'Not available';
-    } else {
-      return 'Preview';
-    }
-  }
+  
 }
+
+
+
+
