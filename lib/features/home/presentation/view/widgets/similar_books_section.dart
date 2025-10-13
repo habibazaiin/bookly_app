@@ -1,6 +1,6 @@
 import 'package:bookly_app/core/utils/styles.dart';
 import 'package:bookly_app/features/home/data/models/book_model/book_model.dart';
-import 'package:bookly_app/features/home/presentation/view/widgets/books_similar_list_view.dart';
+import 'package:bookly_app/features/home/presentation/view/widgets/similar_books_list_view.dart';
 import 'package:flutter/material.dart';
 
 class SimilarBooksSection extends StatelessWidget {
@@ -19,7 +19,7 @@ class SimilarBooksSection extends StatelessWidget {
           ),
         ),
         SizedBox(height: 16),
-        BooksSimilarListView(),
+        SimilarBooksListView(),
       ],
     );
   }
