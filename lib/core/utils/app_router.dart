@@ -4,7 +4,7 @@ import 'package:bookly_app/core/utils/service_locator.dart';
 import 'package:bookly_app/features/home/data/models/book_model/book_model.dart';
 import 'package:bookly_app/features/home/data/repos/home_repo.dart';
 import 'package:bookly_app/features/home/data/repos/home_repo_impl.dart';
-import 'package:bookly_app/features/home/presentation/manager/similar_books_cubit/similar_books_cubit.dart';
+import 'package:bookly_app/features/home/presentation/manager/cubit/similar_books_cubit.dart';
 import 'package:bookly_app/features/home/presentation/view/book_details_view.dart';
 import 'package:bookly_app/features/home/presentation/view/home_view.dart';
 import 'package:bookly_app/features/search/presentation/view/search_view.dart';
