@@ -15,7 +15,7 @@ class VolumeInfo {
   int? pageCount;
   String? printType;
   List<String>? categories;
-  int? averageRating;
+  double? averageRating;
   int? ratingsCount;
   String? maturityRating;
   bool? allowAnonLogging;
@@ -68,7 +68,7 @@ class VolumeInfo {
     pageCount: json['pageCount'] as int?,
     printType: json['printType'] as String?,
     categories: (json['categories'] as List<dynamic>?)?.cast<String>(),
-    averageRating: json['averageRating'] as int?,
+    averageRating: (json['averageRating'] as num?)?.toDouble(),
     ratingsCount: json['ratingsCount'] as int?,
     maturityRating: json['maturityRating'] as String?,
     allowAnonLogging: json['allowAnonLogging'] as bool?,
@@ -78,7 +78,12 @@ class VolumeInfo {
         : PanelizationSummary.fromJson(
             json['panelizationSummary'] as Map<String, dynamic>,
           ),
-    imageLinks: ImageLinks.fromJson(json['imageLinks'] as Map<String, dynamic>),
+    imageLinks: json['imageLinks'] != null
+    ? ImageLinks.fromJson(json['imageLinks'] as Map<String, dynamic>)
+    : ImageLinks(
+        thumbnail: '',
+        smallThumbnail: '',
+      ),
     language: json['language'] as String?,
     previewLink: json['previewLink'] as String?,
     infoLink: json['infoLink'] as String?,
