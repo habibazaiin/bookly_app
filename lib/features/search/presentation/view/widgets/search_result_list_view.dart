@@ -20,7 +20,7 @@ class SearchResultListView extends StatelessWidget {
             itemBuilder: (context, index) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: NewestBooksListViewItem(bookModel: state.books[index]),
+                child: Text('data')//NewestBooksListViewItem(bookModel: state.books[index]),
               );
             },
           );
