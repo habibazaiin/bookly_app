@@ -1,6 +1,7 @@
 import 'package:bookly_app/constants.dart';
 import 'package:bookly_app/core/utils/assets.dart';
 import 'package:bookly_app/core/utils/styles.dart';
+import 'package:bookly_app/features/home/presentation/view/widgets/featured_list_view_bloc_builder.dart';
 import 'package:bookly_app/features/home/presentation/view/widgets/newest_books_list_view.dart';
 import 'package:bookly_app/features/home/presentation/view/widgets/newest_books_list_view_item.dart';
 import 'package:bookly_app/features/home/presentation/view/widgets/custom_book_image.dart';
@@ -25,7 +26,7 @@ class HomeViewBody extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),
                 child: CustomAppBar(),
               ),
-              FeaturedListView(),
+              FeaturedListViewBlocBuilder(),
               SizedBox(height: 50),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30.0),

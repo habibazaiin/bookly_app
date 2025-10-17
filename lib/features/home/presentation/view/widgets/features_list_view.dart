@@ -1,58 +1,37 @@
 import 'package:bookly_app/core/utils/app_router.dart';
-import 'package:bookly_app/core/utils/styles.dart';
-import 'package:bookly_app/core/widgets/custom_error_widget.dart';
-import 'package:bookly_app/core/widgets/custom_loading_indicator.dart';
-import 'package:bookly_app/features/home/presentation/manager/featured_books_cubit/featured_books_cubit.dart';
+import 'package:bookly_app/features/home/domain/entities/book_entity.dart';
 import 'package:bookly_app/features/home/presentation/view/widgets/custom_book_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
+
 import 'package:go_router/go_router.dart';
 
 class FeaturedListView extends StatelessWidget {
-  const FeaturedListView({super.key});
+  const FeaturedListView({super.key, required this.bookEntity});
+final List<BookEntity> bookEntity;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FeaturedBooksCubit, FeaturedBooksState>(
-      builder: (context, state) {
-        if (state is FeaturedBooksSuccess) {
-          return SizedBox(
-            height: MediaQuery.of(context).size.height * .3,
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              itemCount: state.books.length,
-              padding: EdgeInsets.zero,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      context.push(
-                        AppRouter.kBookDetailsView,
-                        extra: state.books[index],
-                      );
-                    },
-                    child: CustomBookImage(
-                      imageURL:
-                          state
-                              .books[index]
-                              .volumeInfo
-                              ?.imageLinks
-                              ?.thumbnail ??
-                          '',
-                    ),
-                  ),
-                );
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * .3,
+      child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
+        itemCount: bookEntity.length,
+        padding: EdgeInsets.zero,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: GestureDetector(
+              onTap: () {
+                context.push(AppRouter.kBookDetailsView, extra: bookEntity[index]);
               },
+              child: CustomBookImage(imageURL: bookEntity[index].image ?? ''),
             ),
           );
-        } else if (state is FeaturedBooksFailure) {
-          return CustomErrorWidget(errMessage: state.errMessage);
-        } else {
-          return CustomLoadingIndicator();
-        }
-      },
+        },
+      ),
     );
   }
 }
+
