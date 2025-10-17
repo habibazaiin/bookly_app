@@ -1,34 +1,22 @@
-import 'package:bookly_app/core/widgets/custom_error_widget.dart';
-import 'package:bookly_app/core/widgets/custom_loading_indicator.dart';
-import 'package:bookly_app/features/home/presentation/manager/newest_books_cubit/newest_books_cubit.dart';
+import 'package:bookly_app/features/home/domain/entities/book_entity.dart';
 import 'package:bookly_app/features/home/presentation/view/widgets/newest_books_list_view_item.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewestBooksListView extends StatelessWidget {
-  const NewestBooksListView({super.key});
+  const NewestBooksListView({super.key, required this.bookEntity});
+  final List<BookEntity> bookEntity;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NewestBooksCubit, NewestBooksState>(
-      builder: (context, state) {
-        if (state is NewestBooksSuccess) {
-          return ListView.builder(
-            padding: EdgeInsets.zero,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: state.books.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: NewestBooksListViewItem(bookModel: state.books[index]),
-              );
-            },
-          );
-        } else if (state is NewestBooksFailure) {
-          return CustomErrorWidget(errMessage: state.errMessage);
-        } else {
-          return CustomLoadingIndicator();
-        }
+    return ListView.builder(
+      padding: EdgeInsets.zero,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: bookEntity.length,
+      itemBuilder: (context, index) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          child: NewestBooksListViewItem(bookEntity: bookEntity[index]),
+        );
       },
     );
   }

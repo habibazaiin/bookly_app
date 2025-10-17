@@ -3,6 +3,7 @@ import 'package:bookly_app/core/utils/assets.dart';
 import 'package:bookly_app/core/utils/styles.dart';
 import 'package:bookly_app/features/home/presentation/view/widgets/featured_list_view_bloc_builder.dart';
 import 'package:bookly_app/features/home/presentation/view/widgets/newest_books_list_view.dart';
+import 'package:bookly_app/features/home/presentation/view/widgets/newest_books_list_view_bloc_builder.dart';
 import 'package:bookly_app/features/home/presentation/view/widgets/newest_books_list_view_item.dart';
 import 'package:bookly_app/features/home/presentation/view/widgets/custom_book_image.dart';
 import 'package:bookly_app/features/home/presentation/view/widgets/features_list_view.dart';
@@ -39,7 +40,7 @@ class HomeViewBody extends StatelessWidget {
         SliverFillRemaining(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
-            child: NewestBooksListView(),
+            child: NewestBooksListViewBlocBuilder(),
           ),
         ),
       ],
