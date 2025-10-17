@@ -1,18 +1,16 @@
 import 'package:bloc/bloc.dart';
-import 'package:bookly_app/core/errors/failure.dart';
-import 'package:bookly_app/core/models/book_model/book_model.dart';
 import 'package:bookly_app/features/home/domain/entities/book_entity.dart';
-import 'package:bookly_app/features/home/domain/repos/home_repo.dart';
+import 'package:bookly_app/features/home/domain/use_case/fetch_newest_books_use_case.dart';
 import 'package:equatable/equatable.dart';
 
 part 'newest_books_state.dart';
 
 class NewestBooksCubit extends Cubit<NewestBooksState> {
-  NewestBooksCubit(this.homeRepo) : super(NewestBooksInitial());
-  final HomeRepo homeRepo;
+  NewestBooksCubit(this.newestBooksUseCase) : super(NewestBooksInitial());
+  final FetchNewestBooksUseCase newestBooksUseCase;
   Future<void> getNewestBooks() async {
     emit(NewestBooksLoading());
-    var result = await homeRepo.fetchNewestBooks();
+    var result = await newestBooksUseCase.call();
     result.fold(
       (failure) {
         emit(NewestBooksFailure(failure.errMessage));
