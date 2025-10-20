@@ -3,28 +3,69 @@ import 'package:bookly_app/features/home/domain/entities/book_entity.dart';
 import 'package:hive_flutter/adapters.dart';
 
 abstract class HomeLocalDataSource {
-  List<BookEntity> fetchNewestBooks();
-  List<BookEntity> fetchFeaturedBooks();
-  List<BookEntity> fetchSimilarBooks({required String category});
+  List<BookEntity> fetchNewestBooks({int pageNumber = 0});
+  List<BookEntity> fetchFeaturedBooks({int pageNumber = 0});
+  List<BookEntity> fetchSimilarBooks({required String category, int pageNumber = 0});
 }
 
 class HomeLocalDataSourceImpl extends HomeLocalDataSource {
   @override
-  List<BookEntity> fetchFeaturedBooks() {
+  List<BookEntity> fetchFeaturedBooks({int pageNumber = 0}) {
     var box = Hive.box<BookEntity>(kFeaturedBox);
-    return box.values.toList();
+    final allBooks = box.values.toList();
+
+    const int booksPerPage = 10;
+    final int start = pageNumber * booksPerPage;
+    final int end = start + booksPerPage;
+
+    if (start >= allBooks.length) {
+      return [];
+    }
+
+    return allBooks.sublist(
+      start,
+      end > allBooks.length ? allBooks.length : end,
+    );
   }
 
   @override
-  List<BookEntity> fetchNewestBooks() {
+  List<BookEntity> fetchNewestBooks({int pageNumber = 0}) {
     var box = Hive.box<BookEntity>(kNewestBox);
-    return box.values.toList();
+    final allBooks = box.values.toList();
+
+    const int booksPerPage = 10;
+    final int start = pageNumber * booksPerPage;
+    final int end = start + booksPerPage;
+
+    if (start >= allBooks.length) {
+      return [];
+    }
+
+    return allBooks.sublist(
+      start,
+      end > allBooks.length ? allBooks.length : end,
+    );
   }
 
   @override
-  List<BookEntity> fetchSimilarBooks({required String category}) {
+  List<BookEntity> fetchSimilarBooks({
+    required String category,
+    int pageNumber = 0,
+  }) {
     var box = Hive.box<BookEntity>(kSimilarBox);
-    return box.values.toList();
-  }
+    final allBooks = box.values.toList();
 
+    const int booksPerPage = 10;
+    final int start = pageNumber * booksPerPage;
+    final int end = start + booksPerPage;
+
+    if (start >= allBooks.length) {
+      return [];
+    }
+
+    return allBooks.sublist(
+      start,
+      end > allBooks.length ? allBooks.length : end,
+    );
+  }
 }

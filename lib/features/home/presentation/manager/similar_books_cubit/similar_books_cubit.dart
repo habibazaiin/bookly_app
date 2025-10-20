@@ -9,10 +9,13 @@ class SimilarBooksCubit extends Cubit<SimilarBooksState> {
   SimilarBooksCubit(this.similarBooksUseCase) : super(SimilarBooksInitial());
   final FetchSimilarBooksUseCase similarBooksUseCase;
 
-  Future<void> getSimilarBooks({required String category}) async {
+  Future<void> getSimilarBooks({
+    required String category,
+    int pageNumber = 0,
+  }) async {
     emit(SimilarBooksLoading());
 
-    var result = await similarBooksUseCase.call(category);
+    var result = await similarBooksUseCase.call(category, pageNumber);
     result.fold(
       (failure) {
         emit(SimilarBooksFailure(errMessage: failure.errMessage));

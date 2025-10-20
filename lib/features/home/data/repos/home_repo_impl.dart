@@ -10,16 +10,25 @@ class HomeRepoImpl implements HomeRepo {
   final HomeLocalDataSource homeLocalDataSource;
   final HomeRemoteDataSource homeRemoteDataSource;
 
-  HomeRepoImpl({required this.homeLocalDataSource, required this.homeRemoteDataSource});
+  HomeRepoImpl({
+    required this.homeLocalDataSource,
+    required this.homeRemoteDataSource,
+  });
   @override
-  Future<Either<Failure, List<BookEntity>>> fetchNewestBooks({int pageNumber = 0}) async {
+  Future<Either<Failure, List<BookEntity>>> fetchNewestBooks({
+    int pageNumber = 0,
+  }) async {
     try {
       List<BookEntity> books;
-      books = await homeLocalDataSource.fetchNewestBooks();
+      books = await homeLocalDataSource.fetchNewestBooks(
+        pageNumber: pageNumber,
+      );
       if (books.isNotEmpty) {
         return right(books);
       }
-      books = await homeRemoteDataSource.fetchNewestBooks();
+      books = await homeRemoteDataSource.fetchNewestBooks(
+        pageNumber: pageNumber,
+      );
       return right(books);
     } on Exception catch (e) {
       if (e is DioException) {
@@ -30,14 +39,20 @@ class HomeRepoImpl implements HomeRepo {
   }
 
   @override
-  Future<Either<Failure, List<BookEntity>>> fetchFeaturedBooks({int pageNumber = 0}) async {
+  Future<Either<Failure, List<BookEntity>>> fetchFeaturedBooks({
+    int pageNumber = 0,
+  }) async {
     try {
       List<BookEntity> books;
-      books = await homeLocalDataSource.fetchFeaturedBooks();
+      books = await homeLocalDataSource.fetchFeaturedBooks(
+        pageNumber: pageNumber,
+      );
       if (books.isNotEmpty) {
         return right(books);
       }
-      books = await homeRemoteDataSource.fetchFeaturedBooks();
+      books = await homeRemoteDataSource.fetchFeaturedBooks(
+        pageNumber: pageNumber,
+      );
       return right(books);
     } on Exception catch (e) {
       if (e is DioException) {
@@ -50,14 +65,21 @@ class HomeRepoImpl implements HomeRepo {
   @override
   Future<Either<Failure, List<BookEntity>>> fetchSimilarBooks({
     required String category,
+    int pageNumber = 0,
   }) async {
     try {
       List<BookEntity> books;
-      books = await homeLocalDataSource.fetchSimilarBooks(category: category);
+      books = await homeLocalDataSource.fetchSimilarBooks(
+        category: category,
+        pageNumber: pageNumber,
+      );
       if (books.isNotEmpty) {
         return right(books);
       }
-      books = await homeRemoteDataSource.fetchNewestBooks();
+      books = await homeRemoteDataSource.fetchSimilarBooks(
+        category: category,
+        pageNumber: pageNumber,
+      );
       return right(books);
     } on Exception catch (e) {
       if (e is DioException) {

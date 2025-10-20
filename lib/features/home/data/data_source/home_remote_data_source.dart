@@ -5,9 +5,9 @@ import 'package:bookly_app/core/utils/api_service.dart';
 import 'package:bookly_app/features/home/domain/entities/book_entity.dart';
 
 abstract class HomeRemoteDataSource {
-  Future<List<BookEntity>> fetchNewestBooks();
-  Future<List<BookEntity>> fetchFeaturedBooks();
-  Future<List<BookEntity>> fetchSimilarBooks({required String category});
+  Future<List<BookEntity>> fetchNewestBooks({int pageNumber = 0});
+  Future<List<BookEntity>> fetchFeaturedBooks({int pageNumber = 0});
+  Future<List<BookEntity>> fetchSimilarBooks({required String category, int pageNumber = 0});
 }
 
 class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
@@ -47,10 +47,10 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   }
 
   @override
-  Future<List<BookEntity>> fetchSimilarBooks({required String category}) async {
+  Future<List<BookEntity>> fetchSimilarBooks({required String category, int pageNumber = 0}) async {
     var data = await apiService.get(
       endPoint:
-          'volumes?Filtering=free-ebooks&Sorting=relevance &q=subject:$category',
+          'volumes?Filtering=free-ebooks&Sorting=relevance &q=subject:$category&startIndex=${pageNumber * 10}',
     );
     List<BookModel> books = [];
     for (var item in data['items']) {
