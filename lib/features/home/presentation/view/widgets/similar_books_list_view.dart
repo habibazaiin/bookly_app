@@ -13,7 +13,7 @@ class SimilarBooksListView extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.of(context).size.height * .15,
       child: ListView.builder(
-        itemCount: 0,
+        itemCount: bookEntity.length,
         scrollDirection: Axis.horizontal,
         padding: EdgeInsets.zero,
         itemBuilder: (context, index) {
@@ -21,7 +21,10 @@ class SimilarBooksListView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 5.0),
             child: GestureDetector(
               onTap: () {
-                context.push(AppRouter.kBookDetailsView, extra: '');
+                context.push(
+                  AppRouter.kBookDetailsView,
+                  extra: bookEntity[index],
+                );
               },
               child: CustomBookImage(imageURL: bookEntity[index].image ?? ''),
             ),
@@ -31,4 +34,3 @@ class SimilarBooksListView extends StatelessWidget {
     );
   }
 }
-

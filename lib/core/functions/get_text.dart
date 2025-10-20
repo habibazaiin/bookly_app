@@ -1,7 +1,7 @@
-import 'package:bookly_app/core/models/book_model/book_model.dart';
+import 'package:bookly_app/features/home/domain/entities/book_entity.dart';
 
-String getText(BookModel bookModel) {
-    if (bookModel.volumeInfo.previewLink == null) {
+String getText(BookEntity bookEntity) {
+    if (bookEntity.previewLink == null) {
       return 'Not available';
     } else {
       return 'Preview';

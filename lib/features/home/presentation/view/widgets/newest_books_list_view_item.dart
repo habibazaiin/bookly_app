@@ -15,7 +15,7 @@ class NewestBooksListViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.push(AppRouter.kBookDetailsView, extra: '');
+        context.push(AppRouter.kBookDetailsView, extra: bookEntity);
       },
       child: Row(
         children: [

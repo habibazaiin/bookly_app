@@ -1,4 +1,3 @@
-
 import 'package:hive/hive.dart';
 part 'book_entity.g.dart';
 
@@ -20,6 +19,21 @@ class BookEntity {
   final num? rating;
   @HiveField(7)
   final num? ratingCount;
+  @HiveField(8)
+  final String? previewLink;
+  @HiveField(9)
+  final String? category;
 
-  BookEntity({required this.bookId, required this.image, required this.title, required this.subTitle, required this.authorName, required this.price, required this.rating, required this.ratingCount});
+  BookEntity({
+    required this.previewLink,
+    required this.category,
+    required this.bookId,
+    required this.image,
+    required this.title,
+    required this.subTitle,
+    required this.authorName,
+    required this.price,
+    required this.rating,
+    required this.ratingCount,
+  });
 }

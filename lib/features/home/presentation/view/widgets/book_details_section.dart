@@ -1,13 +1,13 @@
 import 'package:bookly_app/core/utils/styles.dart';
-import 'package:bookly_app/core/models/book_model/book_model.dart';
+import 'package:bookly_app/features/home/domain/entities/book_entity.dart';
 import 'package:bookly_app/features/home/presentation/view/widgets/book_rating.dart';
 import 'package:bookly_app/features/home/presentation/view/widgets/books_action.dart';
 import 'package:bookly_app/features/home/presentation/view/widgets/custom_book_image.dart';
 import 'package:flutter/material.dart';
 
 class BookDetailsSection extends StatelessWidget {
-  const BookDetailsSection({super.key, required this.bookModel});
-  final BookModel bookModel;
+  const BookDetailsSection({super.key, required this.bookEntity});
+  final BookEntity bookEntity;
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +17,12 @@ class BookDetailsSection extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: width),
           child: CustomBookImage(
-            imageURL: bookModel.volumeInfo.imageLinks?.thumbnail ?? '',
+            imageURL: bookEntity.image ?? '',
           ),
         ),
         const SizedBox(height: 42),
         Text(
-          bookModel.volumeInfo.title!,
+          bookEntity.title,
           style: Styles.textStyle30.copyWith(fontWeight: FontWeight.bold),
           textAlign: TextAlign.center,
         ),
@@ -30,7 +30,7 @@ class BookDetailsSection extends StatelessWidget {
         Opacity(
           opacity: 0.7,
           child: Text(
-            bookModel.volumeInfo.authors?[0] ?? '',
+            bookEntity.authorName ?? '',
             style: Styles.textStyle18.copyWith(
               fontStyle: FontStyle.italic,
               fontWeight: FontWeight.w500,
@@ -40,11 +40,11 @@ class BookDetailsSection extends StatelessWidget {
         SizedBox(height: 18),
         BookRating(
           mainAxisAlignment: MainAxisAlignment.center,
-          rating: bookModel.volumeInfo.averageRating ?? 0,
-          count: bookModel.volumeInfo.ratingsCount ?? 0,
+          rating: (bookEntity.rating ?? 0).toDouble(),
+          count: (bookEntity.ratingCount ?? 0).toInt(),
         ),
         SizedBox(height: 37),
-        BooksAction(bookModel: bookModel,),
+        BooksAction(bookEntity: bookEntity,),
       ],
     );
   }
