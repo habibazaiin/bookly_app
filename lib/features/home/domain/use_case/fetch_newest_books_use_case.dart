@@ -5,15 +5,15 @@ import 'package:bookly_app/features/home/domain/entities/book_entity.dart';
 import 'package:bookly_app/features/home/domain/repos/home_repo.dart';
 import 'package:dartz/dartz.dart';
 
-class FetchNewestBooksUseCase extends UseCase<List<BookEntity>, NoParam> {
+class FetchNewestBooksUseCase extends UseCase<List<BookEntity>, int> {
   final HomeRepo homeRepo;
 
   FetchNewestBooksUseCase({required this.homeRepo});
 
   @override
-  Future<Either<Failure, List<BookEntity>>> call([NoParam? param]) {
+  Future<Either<Failure, List<BookEntity>>> call([int pageNumber = 0]) {
     //check permission
-    return homeRepo.fetchNewestBooks();
+    return homeRepo.fetchNewestBooks(pageNumber: pageNumber);
   }
 }
 
