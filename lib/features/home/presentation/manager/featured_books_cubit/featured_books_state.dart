@@ -22,3 +22,5 @@ final class FeaturedBooksSuccess extends FeaturedBooksState {
 
   const FeaturedBooksSuccess(this.books);
 }
+
+final class FeaturedBooksPaginationLoading extends FeaturedBooksState {}

@@ -21,6 +21,9 @@ void main() async {
   await Hive.openBox<BookEntity>(kFeaturedBox);
   await Hive.openBox<BookEntity>(kNewestBox);
   await Hive.openBox<BookEntity>(kSimilarBox);
+  // await Hive.box<BookEntity>(kFeaturedBox).clear();
+  // await Hive.box<BookEntity>(kNewestBox).clear();
+  // await Hive.box<BookEntity>(kSimilarBox).clear();
   Bloc.observer = SimpleBlocObserver();
   runApp(const BooklyApp());
 }

@@ -22,3 +22,5 @@ final class NewestBooksFailure extends NewestBooksState {
 
   const NewestBooksFailure(this.errMessage);
 }
+
+final class NewestBooksPaginationLoading extends NewestBooksState {}
