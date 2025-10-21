@@ -1,4 +1,5 @@
 import 'package:bookly_app/core/widgets/FadingWidget.dart';
+import 'package:bookly_app/features/home/presentation/view/widgets/custom_book_image_loading_indicator.dart';
 import 'package:flutter/material.dart';
 
 class FeaturedListViewLoadingIndicator extends StatelessWidget {
@@ -20,18 +21,7 @@ class FeaturedListViewLoadingIndicator extends StatelessWidget {
           itemBuilder: (context, index) {
             return Padding(
               padding: const EdgeInsets.only(left: 8.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: AspectRatio(
-                  aspectRatio: 2.5 / 4,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                ),
-              ),
+              child: CustomBookImageLoadingIndicator(),
             );
           },
         ),
@@ -39,3 +29,5 @@ class FeaturedListViewLoadingIndicator extends StatelessWidget {
     );
   }
 }
+
+
