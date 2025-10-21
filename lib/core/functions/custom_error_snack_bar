@@ -1,0 +1,131 @@
+import 'package:flutter/material.dart';
+
+/// Shows a nicely styled error snackbar.
+/// - [message]: main error text (required).
+/// - [title]: optional short title (defaults to "Error").
+/// - [onRetry]: optional callback to show a Retry button.
+/// - [duration]: how long the snackbar stays (default 4s).
+void showErrorSnackbar(
+  BuildContext context,
+  String message, {
+  String? title,
+  VoidCallback? onRetry,
+  Duration duration = const Duration(seconds: 4),
+}) {
+  final brightness = Theme.of(context).brightness;
+  // adapt colors for light/dark themes
+  final gradientColors = brightness == Brightness.dark
+      ? [Color(0xFFB00020), Color(0xFF8B0000)]
+      : [Color(0xFFD32F2F), Color(0xFFC62828)];
+
+  final snackBar = SnackBar(
+    behavior: SnackBarBehavior.floating,
+    elevation: 0,
+    backgroundColor: Colors.transparent,
+    duration: duration,
+    content: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: gradientColors,
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 8,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // icon
+          Container(
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              color: Colors.white24,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              Icons.error_outline,
+              color: Colors.white,
+              size: 22,
+              semanticLabel: 'Error icon',
+            ),
+          ),
+          const SizedBox(width: 12),
+
+          // text block (title + message)
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // title
+                if ((title ?? 'Error').isNotEmpty)
+                  Text(
+                    title ?? 'Error',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      height: 1.1,
+                    ),
+                    // allow screen readers to announce title
+                    semanticsLabel: title ?? 'Error',
+                  ),
+                // message
+                Text(
+                  message,
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.95),
+                    fontSize: 13,
+                    height: 1.15,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
+              ],
+            ),
+          ),
+
+          // optional retry button
+          if (onRetry != null) ...[
+            const SizedBox(width: 8),
+            TextButton(
+              onPressed: () {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                onRetry();
+              },
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                backgroundColor: Colors.white24,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              ),
+              child: Text(
+                'Retry',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 13,
+                ),
+              ),
+            ),
+          ],
+        ],
+      ),
+    ),
+  );
+
+  // show the snackbar via ScaffoldMessenger
+  ScaffoldMessenger.of(context)
+    ..removeCurrentSnackBar() // make it feel responsive
+    ..showSnackBar(snackBar);
+}

@@ -24,3 +24,9 @@ final class FeaturedBooksSuccess extends FeaturedBooksState {
 }
 
 final class FeaturedBooksPaginationLoading extends FeaturedBooksState {}
+
+final class FeaturedBooksPaginationFailure extends FeaturedBooksState {
+  final String errMessage;
+
+  const FeaturedBooksPaginationFailure(this.errMessage);
+}

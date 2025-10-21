@@ -24,3 +24,10 @@ final class NewestBooksFailure extends NewestBooksState {
 }
 
 final class NewestBooksPaginationLoading extends NewestBooksState {}
+
+final class NewestBooksPaginationFailure extends NewestBooksState {
+  final String errMessage;
+
+  const NewestBooksPaginationFailure(this.errMessage);
+
+}
