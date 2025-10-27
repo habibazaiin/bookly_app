@@ -21,7 +21,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
           'volumes?Filtering=free-ebooks&Sorting=relevance &q=subject:Programming&startIndex=${pageNumber * 10}',
     );
 
-    List<BookModel> books = [];
+    List<BookEntity> books = [];
 
     for (var item in data['items']) {
       books.add(BookModel.fromJson(item));
@@ -37,7 +37,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
           'volumes?Filtering=free-ebooks&Sorting=newest &q=computer science&startIndex=${pageNumber * 10}',
     );
 
-    List<BookModel> books = [];
+    List<BookEntity> books = [];
 
     for (var item in data['items']) {
       books.add(BookModel.fromJson(item));
@@ -52,7 +52,7 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
       endPoint:
           'volumes?Filtering=free-ebooks&Sorting=relevance &q=subject:$category&startIndex=${pageNumber * 10}',
     );
-    List<BookModel> books = [];
+    List<BookEntity> books = [];
     for (var item in data['items']) {
       books.add(BookModel.fromJson(item));
     }
