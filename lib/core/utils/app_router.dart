@@ -48,7 +48,7 @@ abstract class AppRouter {
       GoRoute(
         path: kSearchView,
         builder: (context, state) => BlocProvider(
-          create: (context) => SearchCubit(getIt.get<SearchRepoImpl>()),
+          create: (context) => SearchCubit(),
           child: const SearchView(),
         ),
       ),
